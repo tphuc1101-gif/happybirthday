@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chúc Mừng Sinh Nhật Huyền Ảo!</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+    </style>
+</head>
+<body>
+
+    <!-- PHẦN HTML MỚI: CÁC CẦU CẦU NỀN -->
+    <div class="background-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- NỘI DUNG CHÍNH -->
+    <div class="card">
+        <h1 id="title">✨ Happy Birthday! ✨</h1>
+        <p class="hint" id="hint">👇 Bấm vào ngọn nến để thổi nhé!</p>
+        
+        <div class="cake" onclick="blowOutCandle()">
+            <div class="plate"></div>
+            <div class="layer layer-bottom"></div>
+            <div class="layer layer-middle"></div>
+            <div class="layer layer-top"></div>
+            <div class="candle"></div>
+            <div class="flame" id="flame"></div>
+            <div class="smoke" id="smoke"></div>
+        </div>
+    </div>
+
+    <script>
+        // Phần Script giữ nguyên như cũ
+        let isBlown = false;
+        function blowOutCandle() {
+            if (isBlown) return;
+            isBlown = true;
+            document.getElementById('flame').style.opacity = '0';
+            document.getElementById('smoke').classList.add('active');
+            document.getElementById('hint').innerText = '🎉 Chúc anh tuổi mới thật rưc rỡ 🎉';
+            document.getElementById('title').innerText = '🎂 Chúc mừng sinh nhật anh taiiiiii 🎂';
+            document.getElementById('title').style.color = '#ffeb3b';
+
+            var duration = 4 * 1000;
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({ particleCount: 7, angle: 60, spread: 60, origin: { x: 0 }, colors: ['#ff75a0', '#fff', '#ffeb3b'] });
+                confetti({ particleCount: 7, angle: 120, spread: 60, origin: { x: 1 }, colors: ['#ff75a0', '#fff', '#ffeb3b'] });
+                if (Date.now() < end) { requestAnimationFrame(frame); }
+            })();
+        }
+    </script>
+</body>
+</html>

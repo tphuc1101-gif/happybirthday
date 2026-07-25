@@ -4,167 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Chúc Mừng Sinh Nhật Huyền Ảo!</title>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="style.css">
     <style>
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* ----------------------------------------------------------- */
-        /* PHẦN SỬA ĐỔI CHÍNH: BACKGROUND MỚI ĐẸP HƠN */
-        /* ----------------------------------------------------------- */
-        body {
-            /* Nền Gradient động chuyển màu giữa xanh tối, tím và hồng váng */
-            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460, #e94560);
-            background-size: 400% 400%; /* Kích thước lớn để tạo hiệu ứng mượt */
-            animation: gradientBg 15s ease infinite; /* Hiệu ứng chuyển động */
-            
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            overflow: hidden;
-            color: #fff;
-            position: relative; /* Để các cực cầu trôi nổi nằm bên dưới nội dung */
-        }
-
-        /* Animation làm cho nền gradient di chuyển */
-        @keyframes gradientBg {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Các cực cầu lung linh trôi nổi phía sau */
-        .background-orbs {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0; /* Nằm dưới chiếc bánh */
-            overflow: hidden;
-        }
-
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px); /* Làm nhòe mạnh để tạo cảm giác ánh sáng lung linh */
-            opacity: 0.5;
-            animation: floatOrbs 20s infinite linear;
-        }
-
-        /* Cài đặt màu và kích thước ngẫu nhiên cho các cầu */
-        .orb-1 { width: 300px; height: 300px; background: #ff75a0; top: 10%; left: 10%; animation-duration: 15s; }
-        .orb-2 { width: 400px; height: 400px; background: #0f3460; bottom: 10%; right: 10%; animation-duration: 25s; delay: -5s; }
-        .orb-3 { width: 200px; height: 200px; background: #ffeb3b; top: 50%; left: 50%; animation-duration: 20s; delay: -10s; }
-
-        @keyframes floatOrbs {
-            0% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, 50px) scale(1.1); }
-            66% { transform: translate(-20px, -30px) scale(0.9); }
-            100% { transform: translate(0, 0) scale(1); }
-        }
-
-        /* ----------------------------------------------------------- */
-        /* PHẦN CŨ (GIỮ NGUYÊN HOẶC CHỈNH NHẸ CHỮ) */
-        /* ----------------------------------------------------------- */
-        .card {
-            text-align: center;
-            padding: 20px;
-            width: 100%;
-            position: relative;
-            z-index: 1; /* Nằm trên nền lung linh */
-        }
-
-        h1 {
-            font-size: 2.2rem;
-            color: #fff;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 30px #ff75a0;
-            margin-bottom: 10px;
-        }
-
-        p.hint {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 40px;
-            animation: pulseHint 1.5s infinite alternate;
-        }
-
-        .cake {
-            position: relative;
-            width: 220px;
-            height: 180px;
-            margin: 0 auto;
-            cursor: pointer;
-        }
-
-        .plate {
-            width: 240px;
-            height: 14px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            position: absolute;
-            bottom: -10px;
-            left: -10px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-        }
-
-        .layer {
-            position: absolute;
-            width: 100%;
-            border-radius: 12px 12px 0 0;
-            box-shadow: inset 0 2px 5px rgba(255,255,255,0.3);
-        }
-
-        .layer-bottom { bottom: 0; height: 60px; background: #6d4c41; }
-        .layer-middle { bottom: 50px; left: 15px; width: 190px; height: 55px; background: #ff80ab; }
-        .layer-top { bottom: 100px; left: 35px; width: 150px; height: 45px; background: #fff0f5; }
-
-        .candle {
-            background: repeating-linear-gradient(45deg, #ff5252, #ff5252 5px, #fff 5px, #fff 10px);
-            width: 12px;
-            height: 40px;
-            position: absolute;
-            bottom: 145px;
-            left: 104px;
-            border-radius: 3px;
-            box-shadow: 0 0 10px rgba(255,255,255,0.5);
-        }
-
-        .flame {
-            position: absolute;
-            background-color: #ff9800;
-            width: 14px;
-            height: 22px;
-            border-radius: 50% 50% 20% 20%;
-            bottom: 188px;
-            left: 103px;
-            animation: burn 0.4s infinite alternate;
-            box-shadow: 0 0 15px #ff9800, 0 0 30px #ffeb3b, 0 0 40px #fff;
-            transition: opacity 0.3s;
-        }
-
-        .smoke {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            bottom: 188px;
-            left: 106px;
-            opacity: 0;
-        }
-
-        .smoke.active { animation: smokeUp 1.5s forwards; }
-
-        @keyframes burn { 0% { transform: scale(1) rotate(-2deg); } 100% { transform: scale(1.1) rotate(2deg); } }
-        @keyframes smokeUp { 0% { opacity: 0.8; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-50px) scale(3); } }
-        @keyframes pulseHint { 0% { opacity: 0.6; transform: scale(0.98); } 100% { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body>
@@ -200,8 +41,8 @@
             isBlown = true;
             document.getElementById('flame').style.opacity = '0';
             document.getElementById('smoke').classList.add('active');
-            document.getElementById('hint').innerText = '🎉 Chúc bạn một tuổi mới rực rỡ! 🎉';
-            document.getElementById('title').innerText = '🎂 LỜI CHÚC ĐÃ ĐƯỢC GỬI! 🎂';
+            document.getElementById('hint').innerText = '🎉 Chúc anh tuổi mới thật rưc rỡ 🎉';
+            document.getElementById('title').innerText = '🎂 Chúc mừng sinh nhật anh taiiiiii 🎂';
             document.getElementById('title').style.color = '#ffeb3b';
 
             var duration = 4 * 1000;
